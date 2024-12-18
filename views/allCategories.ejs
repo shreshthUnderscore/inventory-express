@@ -6,6 +6,13 @@
     <title><%= title %></title>
   </head>
   <body>
+    <ul>
+      <% data.forEach(mes => { %>
+      <li><a href="<%=mes.category_name%>"><img src=<%= mes.image_url %> /></a>
+      <p><%= mes.category_name %></p>
+      </li>
+      <% }) %>
+    </ul>
     <%= title %>
   </body>
 </html>

@@ -2,12 +2,16 @@ const pool = require("./pool");
 
 async function getAllCategoryNames() {
   const result = await pool.query("SELECT category_name FROM categories");
-  // Add this line to print the returned object
   return result.rows;
 }
 
 async function getAllImageUrl() {
   const result = await pool.query("SELECT image_url FROM categories");
+  return result.rows;
+}
+
+async function getAllRows() {
+  const result = await pool.query("select * from categories");
   return result.rows;
 }
 
@@ -18,5 +22,6 @@ async function getAllImageUrl() {
 module.exports = {
   getAllCategoryNames,
   getAllImageUrl,
+  getAllRows,
   //   insertUsername,
 };
