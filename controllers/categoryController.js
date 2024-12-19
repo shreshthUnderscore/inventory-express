@@ -1,4 +1,5 @@
 const db = require("../database/query");
+const { updateItem } = require("../database/query");
 
 const categoryExists = async (category) => {
   const validCategories = await db.getAllCategoryNames();
@@ -41,5 +42,25 @@ exports.searchItem = async (req, res) => {
     res.render("searchItems", { title: itemName, data: itemData.rows });
   } else {
     res.render("error", { title: "error" });
+  }
+};
+
+exports.postUpdatedItems = async (req, res) => {
+  const {
+    "item-id": itemId,
+    "item-name": itemName,
+    amount,
+    price,
+    "image-Url": imageUrl,
+    category,
+  } = req.body;
+  console.log(req.body);
+
+  try {
+    await updateItem(itemId, itemName, amount, price, imageUrl, category);
+    res.redirect("/"); // Changed from req.redirect to res.redirect
+  } catch (error) {
+    console.error("Update Error:", error);
+    res.render("error", { title: "Update Error" });
   }
 };

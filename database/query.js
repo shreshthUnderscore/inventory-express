@@ -42,6 +42,20 @@ async function searchItem(item_name) {
   return item;
 }
 
+async function updateItem(
+  itemId,
+  itemName,
+  amount,
+  price,
+  imageUrl,
+  categoryId
+) {
+  await pool.query(
+    "UPDATE items SET item_name = $1, amount = $2, price = $3, image_url = $4, category_id = $5 WHERE id = $6",
+    [itemName, amount, price, imageUrl, categoryId, itemId]
+  );
+}
+
 // async function insertUsername(username) {
 //   await pool.query("INSERT INTO usernames (username) VALUES ($1)", [username]);
 // }
@@ -53,4 +67,5 @@ module.exports = {
   getCategoryDatabase,
   searchItem,
   getCategoryNameAndId,
+  updateItem,
 };

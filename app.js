@@ -7,6 +7,7 @@ const searchRouter = require("./routes/searchRouter");
 app.set("view engine", "ejs");
 app.use("/images", express.static(path.join(__dirname, "public/images")));
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use("/search", searchRouter);
 app.use("/", categoryRouter);
 
