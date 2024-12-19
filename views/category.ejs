@@ -6,6 +6,16 @@
     <title><%= title %></title>
   </head>
   <body>
-    <%= title %>
+    <ul>
+      <% data.forEach(item => { %>
+      <li>
+        <img src=<%= item.image_url %> />
+        <p><%= item.item_name %></p>
+        <span>
+          Amt: <%= item.quantity_available %>
+        </span> 
+      </li>
+      <% }) %>
+    </ul>
   </body>
 </html>
