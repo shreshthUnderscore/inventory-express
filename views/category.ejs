@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= title %></title>
+    <script src="javascript.js" defer></script>
   </head>
   <body>
     <form action="/search" method="get">
@@ -17,10 +18,30 @@
         <p><%= item.item_name %></p>
         <span>
           Amt: <%= item.quantity_available %>
-        </span> 
+        </span>
+        <button>Edit</button>
       </li>
       <% }) %>
     </ul>
+    <div id="updateForm">
+      <form action="/" method="post">
+        <label for="item-name">Item Name:</label>
+        <input name="item-name">
+        <label for="amount">Amount:</label>
+        <input name="amount">
+        <label for="price">Price:</label>
+        <input name="price">
+        <label for="image-Url">Image Url:</label>
+        <input name="image-Url">
+        <label for="category">Category:</label>
+        <select id="category" name="category">
+          <% console.log(allCategoryNames); %>
+          <% allCategoryNames.forEach(item => { %>
+          <option value=${item.id} <%= item.category_name === title ? 'selected' : '' %>><%= item.category_name %></option>  
+          <% }) %>
+        </select>
+      </form>
+    </div>
     <a href="/">Back to home</a>
   </body>
 </html>

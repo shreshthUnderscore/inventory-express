@@ -5,6 +5,11 @@ async function getAllCategoryNames() {
   return result.rows;
 }
 
+async function getCategoryNameAndId() {
+  const result = await pool.query("select id, category_name from categories");
+  return result.rows;
+}
+
 async function getAllImageUrl() {
   const result = await pool.query("SELECT image_url FROM categories");
   return result.rows;
@@ -47,4 +52,5 @@ module.exports = {
   getAllRows,
   getCategoryDatabase,
   searchItem,
+  getCategoryNameAndId,
 };

@@ -22,7 +22,12 @@ exports.getCategory = async (req, res) => {
   const { category } = req.params;
   if (await categoryExists(category)) {
     const categoryDatabase = await db.getCategoryDatabase(category);
-    res.render("category", { title: `${category}`, data: categoryDatabase });
+    const allCategoryNames = await db.getCategoryNameAndId();
+    res.render("category", {
+      title: `${category}`,
+      data: categoryDatabase,
+      allCategoryNames: allCategoryNames,
+    });
   } else {
     res.render("error", { title: "Error" });
   }
