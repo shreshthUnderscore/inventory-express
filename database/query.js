@@ -56,6 +56,11 @@ async function updateItem(
   );
 }
 
+async function deleteItem(itemId) {
+  await pool.query("delete from items where id = $1", [itemId]);
+  console.log(`delete from items where id = ${itemId}`);
+}
+
 // async function insertUsername(username) {
 //   await pool.query("INSERT INTO usernames (username) VALUES ($1)", [username]);
 // }
@@ -68,4 +73,5 @@ module.exports = {
   searchItem,
   getCategoryNameAndId,
   updateItem,
+  deleteItem,
 };

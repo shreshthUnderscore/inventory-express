@@ -54,13 +54,23 @@ exports.postUpdatedItems = async (req, res) => {
     "image-Url": imageUrl,
     category,
   } = req.body;
-  console.log(req.body);
 
   try {
-    await updateItem(itemId, itemName, amount, price, imageUrl, category);
+    await db.updateItem(itemId, itemName, amount, price, imageUrl, category);
     res.redirect("/"); // Changed from req.redirect to res.redirect
   } catch (error) {
     console.error("Update Error:", error);
     res.render("error", { title: "Update Error" });
+  }
+};
+
+exports.postDeleteItem = async (req, res) => {
+  const { "item-id": itemId } = req.body;
+  try {
+    await db.deleteItem(itemId);
+    res.redirect("/");
+  } catch (error) {
+    console.error("Deleting Error", error);
+    res.render("error", { title: "deleting error" });
   }
 };

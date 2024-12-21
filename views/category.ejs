@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= title %></title>
+    <link rel="stylesheet" href="../css/global.css">
   </head>
   <body>
     <form action="/search" method="get">
@@ -41,15 +42,45 @@
                 </option>  
               <% }) %>
             </select>
+            <button type="reset" onclick="">Cancel</button>
             <button type="submit">Submit</button>
           </form>
+        </div>
+
+        <button class="delete-btn" id="<%= item.id %>">Delete</button>
+
+        <div class="delete-form" style="display: none" >
+          <form action="/delete-item" method="post">
+            <h1>Delete Item <%=item.item_name%> ?
+              <br>
+              <strong>
+                THIS ACTION CANNOT BE REVERTED
+              </strong>
+            </h1>
+            <input name="item-id" value="<%= item.id %>" hidden>
+            <button type="reset" onclick="window.history.back();">Cancel</button>
+            <button type="submit">CONFIRM</button>
+          </form> 
         </div>
       </li>
       <% }) %>
     </ul>
+
+    
     <a href="/">Back to home</a>
     <script>
       document.querySelectorAll('.edit-btn').forEach(button => {
+        button.addEventListener('click', (e) => {
+          const form = e.target.nextElementSibling;
+          if (form.style.display === "none" || form.style.display === "") {
+            form.style.display = "block";
+          } else {
+            form.style.display = "none";
+          }
+        });
+      });
+
+      document.querySelectorAll('.delete-btn').forEach(button => {
         button.addEventListener('click', (e) => {
           const form = e.target.nextElementSibling;
           if (form.style.display === "none" || form.style.display === "") {
