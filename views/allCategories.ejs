@@ -7,18 +7,39 @@
   </head>
   <body>
     <form action="/search" method="get">
-      <input type="text" name="query"> 
+      <input type="text" name="query" placeholder="search"> 
       <input type="submit" hidden />
     </form>
     
     <ul>
-      <% data.forEach(mes => { %>
-      <li><a href="<%=mes.category_name%>"><img src=<%= mes.image_url %> /></a>
-      <p><%= mes.category_name %></p>
+      <% data.forEach(category => { %>
+      <li><a href="<%=category.category_name%>"><img src=<%= category.image_url %> /></a>
+      <p><%= category.category_name %></p>
+
+      <button class="delete-btn" id="<%= category.id %>">Delete</button>
+      <div class="delete-form" style="display: none;">
+        <form action="/delete-category" method="post">
+        <h1>Delete Category <% category.category_name %> ?</h1>
+        <p><strong>THIS ACTION CANNOT BE REVERTED</strong></p>
+        <input name="category-id" value="<%= category.id %>" hidden>
+        <button type="submit">Confirm</button>
+      </form>
+      </div>
+      
       </li>
       <% }) %>
     </ul>
-  <%= title %>
-  <img src="https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_294/NI_CATALOG/IMAGES/CIW/2024/4/22/501ccda7-f9d9-4017-9e20-75f3a07dda13_ee4a7671-f277-40ce-9843-f046a376ac41">
   </body>
+  <script>
+    document.querySelectorAll(".delete-btn").forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const form = e.target.nextElementSibling;
+        if(form.style.display === "none"){
+          form.style.display = "block";
+        } else {
+          form.style.display = "none";
+        }
+      });
+    });
+  </script>
 </html>

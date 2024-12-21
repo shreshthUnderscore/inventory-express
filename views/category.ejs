@@ -8,16 +8,16 @@
   </head>
   <body>
     <form action="/search" method="get">
-      <input type="text" name="query"> 
+      <input type="text" name="query" placeholder="search"> 
       <input type="submit" hidden />
     </form>
     <ul>
       <% data.forEach(item => { %>
       <li>
         <img src="<%= item.image_url %>" />
-        <p><%= item.item_name %></p>
+        <p><%= item.item_name %> Price <%= item.price %></p>
         <span>
-          Amt: <%= item.quantity_available %>
+          Amt: <%= item.amount %>
         </span>
         <button class="edit-btn" data-item-id="<%= item.id %>">Edit</button>
 

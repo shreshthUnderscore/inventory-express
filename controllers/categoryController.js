@@ -74,3 +74,14 @@ exports.postDeleteItem = async (req, res) => {
     res.render("error", { title: "deleting error" });
   }
 };
+
+exports.postDeleteCategory = async (req, res) => {
+  const { "category-id": categoryId } = req.body;
+  try {
+    await db.deleteCategory(categoryId);
+    res.redirect("/");
+  } catch (error) {
+    console.error("category delete error", error);
+    res.render("error", { title: "category delete error" });
+  }
+};

@@ -58,7 +58,10 @@ async function updateItem(
 
 async function deleteItem(itemId) {
   await pool.query("delete from items where id = $1", [itemId]);
-  console.log(`delete from items where id = ${itemId}`);
+}
+
+async function deleteCategory(categoryId) {
+  await pool.query("delete from categories where id = $1", [categoryId]);
 }
 
 // async function insertUsername(username) {
@@ -74,4 +77,5 @@ module.exports = {
   getCategoryNameAndId,
   updateItem,
   deleteItem,
+  deleteCategory,
 };
